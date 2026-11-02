@@ -30,27 +30,27 @@ export const experience: Experience[] = [
       contributions: [
         {
           text: "Building ingestion pipelines against the Salesforce Bulk API 2.0.",
-          scope: "participated",
+          scope: "personal",
           status: "in-progress",
         },
         {
           text: "Implementing incremental synchronization driven by SystemModstamp watermarks.",
-          scope: "participated",
+          scope: "personal",
           status: "in-progress",
         },
         {
           text: "Handling deleted records and making ingestion resumable after interruption.",
-          scope: "participated",
+          scope: "personal",
           status: "in-progress",
         },
         {
           text: "Applying PII masking and deduplication before persistence.",
-          scope: "participated",
+          scope: "personal",
           status: "in-progress",
         },
         {
           text: "Writing ingested CRM data into a MinIO-based Bronze layer.",
-          scope: "participated",
+          scope: "personal",
           status: "in-progress",
         },
       ],

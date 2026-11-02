@@ -23,6 +23,10 @@ export type DiagramEdge = {
   to: string;
   label?: string;
   dashed?: boolean;
+  /** Elbow routing for diagonal edges: vertical-first (default) or horizontal-first. */
+  route?: "v" | "h";
+  /** Horizontal shift (px) of the [source, target] attachment points, to separate shared ports. */
+  offset?: [number, number];
 };
 
 export type Diagram = {
@@ -52,7 +56,7 @@ export const diagrams: Diagram[] = [
         id: "airflow",
         label: "Apache Airflow",
         sublabel: "scheduling · retries",
-        col: 1,
+        col: 1.5,
         row: 0,
         status: "built",
         layer: "control",
@@ -95,7 +99,7 @@ export const diagrams: Diagram[] = [
       {
         id: "bronze",
         label: "Bronze",
-        sublabel: "raw messages · PostgreSQL",
+        sublabel: "raw · PostgreSQL",
         col: 1,
         row: 1,
         status: "built",
@@ -120,7 +124,7 @@ export const diagrams: Diagram[] = [
         id: "gold",
         label: "Gold",
         sublabel: "analytics · phase 2",
-        col: 2,
+        col: 3,
         row: 0,
         status: "planned",
         layer: "gold",
@@ -151,7 +155,7 @@ export const diagrams: Diagram[] = [
       {
         id: "dashboard",
         label: "Dashboard",
-        sublabel: "React · authenticated",
+        sublabel: "React · auth",
         col: 4,
         row: 1,
         status: "built",
@@ -164,14 +168,14 @@ export const diagrams: Diagram[] = [
     edges: [
       { from: "gmail", to: "bronze" },
       { from: "sheets", to: "bronze" },
-      { from: "messenger", to: "bronze", dashed: true },
+      { from: "messenger", to: "bronze", dashed: true, offset: [0, -28] },
       { from: "bronze", to: "silver", label: "dbt" },
-      { from: "silver", to: "gold", dashed: true },
+      { from: "silver", to: "gold", dashed: true, offset: [28, 0] },
       { from: "silver", to: "api" },
       { from: "identity", to: "silver" },
       { from: "api", to: "dashboard" },
-      { from: "airflow", to: "bronze", label: "ingest", dashed: true },
-      { from: "airflow", to: "silver", label: "transform", dashed: true },
+      { from: "airflow", to: "bronze", dashed: true },
+      { from: "airflow", to: "silver", dashed: true, offset: [0, -28] },
     ],
     notes: "Planned for Phase 2: LLM-based information extraction and pipeline failure alerting.",
   },
@@ -420,7 +424,7 @@ export const diagrams: Diagram[] = [
       { from: "mask", to: "minio" },
       { from: "resume", to: "bulk", dashed: true },
       { from: "watermark", to: "deletes", dashed: true },
-      { from: "deletes", to: "mask" },
+      { from: "deletes", to: "mask", route: "h" },
     ],
     notes: "PostgreSQL, Apache Airflow, and Docker are also part of the stack.",
   },
