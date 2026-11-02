@@ -28,11 +28,12 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-xs text-gold">{project.category}</span>
-          <span aria-hidden className="text-fg-subtle">·</span>
-          <span className="font-mono text-xs text-fg-subtle">{project.kind}</span>
-          <StatusBadge status={project.status} className="ml-auto" />
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-xs text-gold">{project.category}</span>
+            <span className="font-mono text-xs text-fg-subtle">{project.kind}</span>
+          </div>
+          <StatusBadge status={project.status} className="shrink-0" />
         </div>
         <h3 className="mt-4 text-xl font-semibold tracking-tight text-fg">
           <Link href={href} className="after:absolute after:inset-0 focus-visible:outline-none">

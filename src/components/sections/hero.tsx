@@ -125,7 +125,7 @@ export function Hero() {
               <ButtonLink href={profile.links.resume} variant="secondary" download>
                 <Download className="size-4" /> Resume
               </ButtonLink>
-              <div className="ml-1 flex items-center gap-1">
+              <div className="-ml-2 flex items-center gap-1 sm:ml-1">
                 <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex size-10 items-center justify-center rounded-lg text-fg-muted transition-colors hover:bg-surface hover:text-fg">
                   <GithubIcon className="size-[18px]" />
                 </a>
