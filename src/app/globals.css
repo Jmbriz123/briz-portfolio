@@ -23,6 +23,7 @@
   --gold: #d9b65e;
   --accent: #5ec8b8;
   --accent-muted: #5ec8b81f;
+  --progress: #8fb3ff;
 }
 
 @theme inline {
@@ -39,6 +40,7 @@
   --color-gold: var(--gold);
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
+  --color-progress: var(--progress);
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
@@ -73,6 +75,17 @@ body {
     linear-gradient(to right, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Data moving along a diagram edge. */
+@keyframes flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.edge-flow {
+  stroke-dasharray: 2 10;
+  animation: flow 1.2s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
