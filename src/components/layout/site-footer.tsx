@@ -10,7 +10,7 @@ export function SiteFooter() {
         <div>
           <p className="text-sm text-fg-muted">&ldquo;{profile.quote}&rdquo;</p>
           <p className="mt-2 font-mono text-xs text-fg-subtle">
-            © {new Date().getFullYear()} {profile.name} · bronze → silver → gold
+            © {profile.name} · bronze → silver → gold
           </p>
         </div>
         <ul className="flex items-center gap-4 text-fg-subtle">
