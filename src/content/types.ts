@@ -37,6 +37,8 @@ export type Experience = {
   company: string;
   /** Path under /public, e.g. "/logos/glynac.svg". Falls back to a monogram. */
   logo?: string;
+  /** Monogram override when initials of the name would mislead. */
+  monogram?: string;
   role: string;
   location: string;
   start: string;
