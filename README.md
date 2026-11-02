@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# briz-portfolio
 
-## Getting Started
+Personal portfolio of Jemarco Briz, Data Engineer. The site is organized like a medallion pipeline:
+**Bronze** (foundations), **Silver** (experience), and **Gold** (engineering).
 
-First, run the development server:
+Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Motion, and Lucide. Every page is
+statically prerendered. There is no database or backend.
+
+## Run locally
+
+Requires Node.js 20.9+ and pnpm.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm build        # production build (also type-checks)
+pnpm start        # serve the production build
+pnpm lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/                       routes, metadata, OG image, sitemap, robots
+    experience/[slug]/       experience case studies
+    projects/[slug]/         project case studies
+  content/                   ← all site content lives here
+  components/
+    sections/                home page sections
+    architecture/            interactive SVG diagram + tabbed showcase
+    case-study/              shared case-study layout
+    experience/              expandable timeline entry
+    layout/                  header and footer
+    ui/                      small primitives (tags, badges, buttons…)
+  lib/                       tier colours, nav items, helpers
+public/
+  resume.pdf                 downloadable resume
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Updating content
 
-## Learn More
+All content is typed data in `src/content/`. Edit the data, not the components.
 
-To learn more about Next.js, take a look at the following resources:
+| What | File | Notes |
+| --- | --- | --- |
+| Name, headline, links | `profile.ts` | Set `siteUrl` to the deployed URL. |
+| Experience | `experience.ts` | Add `caseStudy` to generate `/experience/<slug>`. Add `logo: "/logos/x.svg"` to replace the monogram. |
+| Projects | `projects.ts` | Projects with `caseStudy` get `/projects/<slug>`. Set `experienceSlug` to link to an experience case study instead. |
+| Diagrams | `architecture.ts` | Nodes sit on a grid (`col`, `row`). Reference a diagram by `id` from a project or case study. |
+| Skills | `skills.ts` | `usedIn` decides the marker: professional, project, or familiar. Add items to `learning` to show "Currently learning". |
+| Notes | `notes.ts` | Add `href` and `published` when an article goes live. |
+| Education | `education.ts` | Add `certifications` entries to show them. |
+| Resume | `public/resume.pdf` | Replace the file and keep the name. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Accuracy conventions:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `status` is `built`, `in-progress`, or `planned`. Never mark unfinished work as built.
+- `scope` on contributions is `personal` (I built it), `participated` (I contributed), or `team` (the team delivered it).
+- Architecture diagrams only contain components that really exist, with no proprietary details.
 
-## Deploy on Vercel
+## Deploy to Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this repository to GitHub.
+2. In Vercel, choose **Add New → Project** and import the repository. The framework preset is
+   detected as Next.js, and the default settings work as they are.
+3. Deploy, then set `profile.siteUrl` in `src/content/profile.ts` to the final URL (or custom domain)
+   so canonical URLs, the sitemap, and Open Graph tags are correct. Push again to redeploy.
