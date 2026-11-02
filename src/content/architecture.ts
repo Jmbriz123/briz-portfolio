@@ -322,7 +322,7 @@ export const diagrams: Diagram[] = [
       },
     ],
     edges: [
-      { from: "api", to: "queue", label: "enqueue" },
+      { from: "api", to: "queue" },
       { from: "queue", to: "workers" },
       { from: "workers", to: "extract", dashed: true, label: "runs" },
       { from: "extract", to: "mask" },
