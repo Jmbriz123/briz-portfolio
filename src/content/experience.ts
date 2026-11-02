@@ -174,6 +174,7 @@ export const experience: Experience[] = [
   {
     slug: "komsai-org",
     company: "UPV Komsai.org",
+    monogram: "KS",
     role: "Web Developer",
     location: "Miagao, Iloilo",
     start: "Feb 2026",
