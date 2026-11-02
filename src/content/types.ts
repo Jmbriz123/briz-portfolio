@@ -35,6 +35,8 @@ export type CaseStudy = {
 export type Experience = {
   slug: string;
   company: string;
+  /** Path under /public, e.g. "/logos/glynac.svg". Falls back to a monogram. */
+  logo?: string;
   role: string;
   location: string;
   start: string;
