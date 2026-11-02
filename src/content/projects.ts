@@ -14,51 +14,50 @@ export const projects: Project[] = [
     status: "in-progress",
     kind: "Team project",
     description:
-      "Centralizes SolTech's fragmented clinic lead and client communication data into one structured, searchable system, replacing spreadsheet-based lead tracking with an orchestrated Bronze → Silver pipeline and an authenticated staff dashboard.",
+      "Centralizes SolTech's fragmented clinic lead and client communication data into one structured, searchable system, replacing spreadsheet-based lead tracking with an orchestrated Bronze → Silver pipeline and an authenticated staff dashboard. I implemented the data engineering work; teammates built the frontend.",
     tech: ["Python", "PostgreSQL", "Apache Airflow", "dbt", "FastAPI", "React", "Alembic", "Docker", "Gmail API"],
     diagram: "solnexus-medallion",
     repo: "https://github.com/CMSC128-NexusWorks/SolNexus",
     caseStudy: {
       overview:
-        "SolTech EMR tracked clinic leads and client conversations in spreadsheets and inboxes. SolNexus is a team-built data integration platform that consolidates those sources into a unified, structured, and searchable system, with a dashboard for managing clinic relationships, follow-ups, and communication history.",
+        "SolTech EMR tracked clinic leads and client conversations in spreadsheets and inboxes. SolNexus is a team-built data integration platform that consolidates those sources into a unified, structured, and searchable system, with a dashboard for managing clinic relationships, follow-ups, and communication history. I implemented the data engineering side: ingestion, the Bronze and Silver layers, orchestration, and identity resolution. The frontend was built by teammates.",
       problem:
         "Lead records lived in manual spreadsheets while the actual conversations lived in email. Nothing linked an email participant to the right clinic, follow-ups were hard to prioritize, and there was no reliable history of who said what and when.",
       diagram: "solnexus-medallion",
       contributions: [
         {
-          text: "Multi-source ingestion: automated Gmail API ingestion and spreadsheet migration to consolidate existing lead records and communication data.",
-          scope: "team",
-          status: "in-progress",
+          text: "Multi-source ingestion: automated Gmail API ingestion and spreadsheet migration that consolidate existing lead records and communication data.",
+          scope: "personal",
+          status: "built",
         },
         {
           text: "Bronze layer: raw message storage in PostgreSQL that preserves source, timestamps, and provenance.",
-          scope: "team",
-          status: "in-progress",
+          scope: "personal",
+          status: "built",
         },
         {
           text: "Silver layer: dbt models that normalize, deduplicate, and structure raw data into relational lead and interaction datasets.",
-          scope: "team",
-          status: "in-progress",
+          scope: "personal",
+          status: "built",
         },
         {
-          text: "Orchestration: Apache Airflow schedules ingestion and transformation with retries for failure handling.",
-          scope: "team",
-          status: "in-progress",
+          text: "Orchestration: Apache Airflow DAGs that schedule ingestion and transformation, with retries for failure handling.",
+          scope: "personal",
+          status: "built",
         },
         {
           text: "Identity resolution: staff-confirmed mapping between external communication participants and clinic records, to prevent incorrect lead associations.",
-          scope: "team",
-          status: "in-progress",
+          scope: "personal",
+          status: "built",
         },
         {
           text: "Data integrity: validation, deduplication, audit trails, and safeguards that preserve operational data across pipeline rebuilds.",
-          scope: "team",
-          status: "in-progress",
+          scope: "personal",
         },
         {
-          text: "Serving layer: FastAPI REST backend and a React dashboard with prioritized follow-ups, searchable lead history, authentication, and editable lead records.",
+          text: "Serving layer: FastAPI REST backend, authentication, and a React dashboard with prioritized follow-ups, searchable lead history, and editable lead records.",
           scope: "team",
-          status: "in-progress",
+          status: "built",
         },
       ],
       decisions: [
@@ -79,7 +78,10 @@ export const projects: Project[] = [
           body: "Staff edit lead records in the dashboard, so the pipeline is designed so that rebuilding derived tables does not discard that operational data.",
         },
       ],
-      outcomes: ["In development. Results will be documented as components ship."],
+      outcomes: [
+        "Phase 1 is built: Gmail and spreadsheet ingestion, Bronze and Silver layers, Airflow orchestration, identity resolution, the FastAPI backend, authentication, and the React dashboard.",
+        "The project is still in progress, with Phase 2 extensions planned.",
+      ],
       lessons: [],
     },
     planned: [
